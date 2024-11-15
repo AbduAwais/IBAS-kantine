@@ -1,45 +1,31 @@
 ﻿@page
-@model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
+@model Ibas.Pages.IndexModel
 
-<div class="text-center">
-    <h1 class="display-4">Kantinens Menu for uge 45 </h1>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Dag</th>
-            <th>Varm Ret</th>
-            <th>Kold Ret</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Man</td>
-            <td>Kylling & pasta</td>
-            <td>Smørebrød</td>
-        </tr>
-        <tr>
-            <td>Tirs</td>
-            <td>Græskarsuppe</td>
-            <td>Pastasalat</td>
-        </tr>
-        <tr>
-            <td>Ons</td>
-            <td>Lasagne</td>
-            <td>Salat</td>
-        </tr>
-        <tr>
-            <td>Tors</td>
-            <td>Fiskefilet</td>
-            <td>Rugbrød</td>
-        </tr>
-        <tr>
-            <td>Fre</td>
-            <td>Pizza</td>
-            <td>Sandwich</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<h2>Canteen Menu</h2>
+
+@if (Model.MenuItems != null && Model.MenuItems.Count > 0)
+{
+<table>
+    <thead>
+    <tr>
+        <th>Day</th>
+        <th>Cold Dish</th>
+        <th>Hot Dish</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.MenuItems)
+    {
+    <tr>
+        <td>@item.RowKey</td> <!-- RowKey is used to store the Day (e.g., Friday) -->
+        <td>@item.ColdDish</td>
+        <td>@item.HotDish</td>
+    </tr>
+    }
+    </tbody>
+</table>
+}
+else
+{
+<p>No menu data available.</p>
+}
